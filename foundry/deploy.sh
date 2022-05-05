@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Read the Rinkeby RPC URL
-echo Enter Your Rinkeby RPC URL:
-echo Example: "https://eth-rinkeby.alchemyapi.io/v2/XXXXXXXXXX"
+# Read the Mumbai RPC URL
+echo Enter Your Mumbai RPC URL:
+echo Example: "https://polygon-mumbai.g.alchemy.com/v2/XXXXXXXXXX"
 read -s rpc
 
 # Read the contract name
