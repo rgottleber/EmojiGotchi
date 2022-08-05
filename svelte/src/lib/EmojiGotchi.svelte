@@ -1,31 +1,28 @@
 <script>
 	import Bar from './Bar.svelte';
 	import Face from './Face.svelte';
+	import { ethers } from 'ethers';
+	import EmojiGotchiAbi from '../contracts/EmojiGotchi.json';
+	export let contractAddr;
+	export let url;
 
-	export let web3Props = {
-		provider: null,
-		signer: null,
-		account: null,
-		chainId: null,
-		contract: null
-	};
 	$: image = '';
-	$: hunger = 0;
-	$: enrichment = 0;
-	$: happiness = 0;
+	$: hunger = '';
+	$: enrichment = '';
+	$: happiness = '';
+	$: tombstones = '';
 	const getMyGotchi = async () => {
-		let currentGotchi = await web3Props.contract.myGotchi();
-		image = await currentGotchi[4];
+		var provider = new ethers.providers.JsonRpcProvider(url);
+		const contract = new ethers.Contract(contractAddr, EmojiGotchiAbi.abi, provider);
+		let currentGotchi = await contract.myGotchi();
+
+		image = await currentGotchi[5];
 		happiness = await currentGotchi[0].toNumber();
 		hunger = await currentGotchi[1].toNumber();
 		enrichment = await currentGotchi[2].toNumber();
-		web3Props.contract.on('EmojiUpdated', async () => {
-			currentGotchi = await web3Props.contract.myGotchi();
-			image = await currentGotchi[4];
-			happiness = await currentGotchi[0].toNumber();
-			hunger = await currentGotchi[1].toNumber();
-			enrichment = await currentGotchi[2].toNumber();
-		});
+		tombstones = await currentGotchi[3].toNumber();
+		//check again after 1 minute
+		setTimeout(getMyGotchi, 60000);
 	};
 	getMyGotchi();
 </script>
@@ -37,26 +34,19 @@
 	Hunger: {hunger}
 	<br />
 	<Bar bind:status={hunger} />
-	<button
-		on:click={() => {
-			web3Props.contract.feed();
-		}}>Feed</button
-	>
 </div>
 <div>
 	Enrichment: {enrichment}
 	<br />
 
 	<Bar bind:status={enrichment} />
-	<button
-		on:click={() => {
-			web3Props.contract.play();
-		}}>Play</button
-	>
 </div>
 <div>
 	Happiness: {happiness}
 	<Bar bind:status={happiness} />
+</div>
+<div>
+	🪦: {tombstones}
 </div>
 
 <style>
