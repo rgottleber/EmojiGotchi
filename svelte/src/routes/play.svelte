@@ -1,7 +1,7 @@
 <script>
 	import Bar from '$lib/Bar.svelte';
 	import WalletConnect from '$lib/WalletConnect.svelte';
-	const contractAddr = '0xf21DcA0DD4758bD54f08e0Fc763ec53af9fDba06';
+	const contractAddr = '0xcE0Ef4bd15607f48828a254e8188A3cE567D2ceE';
 	import EmojiGotchiAbi from '../contracts/EmojiGotchi.json';
 	import PlayGotchi from '../lib/PlayGotchi.svelte';
 
