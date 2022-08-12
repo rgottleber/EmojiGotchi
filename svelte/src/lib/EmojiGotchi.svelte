@@ -45,7 +45,7 @@
 	Happiness: {happiness}
 	<Bar bind:status={happiness} />
 </div>
-<div>
+<div class="text-4xl">
 	🪦: {tombstones}
 </div>
 

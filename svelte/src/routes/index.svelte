@@ -4,6 +4,9 @@
 	const url = 'https://rpc-mumbai.maticvigil.com';
 </script>
 
-<h1>My EmojiGotchi</h1>
+<!-- tailwind center items in column with flex  -->
+<div class="flex flex-col items-center">
+	<h1 class="text-6xl">Our EmojiGotchi</h1>
 
-<EmojiGotchi {contractAddr} {url} />
+	<EmojiGotchi {contractAddr} {url} />
+</div>

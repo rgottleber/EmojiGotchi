@@ -17,11 +17,7 @@
 {#if !web3Props.account}
 	<WalletConnect bind:web3Props {contractAddr} contractAbi={EmojiGotchiAbi} />
 {:else}
-	<PlayGotchi {web3Props} contractAbi={EmojiGotchiAbi} />
+	<div class="flex flex-col items-center">
+		<PlayGotchi {web3Props} contractAbi={EmojiGotchiAbi} />
+	</div>
 {/if}
-
-<style>
-	div {
-		width: 33%;
-	}
-</style>
